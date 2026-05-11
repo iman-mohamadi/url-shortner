@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Footer } from "@/components/footer"
+import { Header } from "@/components/header"
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
@@ -13,8 +14,8 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata = {
-  title: "URL Shortener - Shorten, Share & Track Links",
-  description: "Fast, reliable, and simple URL shortening service. Shorten your links, share them easily, and track their performance.",
+  title: "LinkSnip - Shorten Links, Amplify Your Reach",
+  description: "Create short, memorable links in seconds. Track clicks, analyze performance, and grow your audience with LinkSnip.",
 }
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col">
         <ThemeProvider>
+          <Header />
           <main className="flex-1">
             {children}
           </main>

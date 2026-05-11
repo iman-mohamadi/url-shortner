@@ -19,7 +19,7 @@ export function Footer() {
 							<Logo className="h-5" />
 						</a>
 						<p className="max-w-sm text-balance text-muted-foreground text-sm">
-							Shorten, share, and track your links with ease. Fast, reliable, and simple URL shortening service.
+							LinkSnip makes link management simple. Shorten, share, and track your links with powerful analytics.
 						</p>
 						<div className="flex gap-2">
 							{socialLinks.map((item, index) => (
@@ -68,7 +68,7 @@ export function Footer() {
 				<div className="absolute inset-x-0 h-px w-full bg-border" />
 				<div className="flex max-w-4xl flex-col justify-between gap-2 py-4">
 					<p className="text-center font-light text-muted-foreground text-sm">
-						&copy; {new Date().getFullYear()} URL Shortener. All rights reserved.
+						&copy; {new Date().getFullYear()} LinkSnip. All rights reserved.
 					</p>
 				</div>
 			</div>
