@@ -1,6 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 w-full h-[60vh] -z-10 bg-black flex flex-col justify-end pb-12 pt-24 px-6 border-t border-white/10">
+    // FIX: Changed -z-10 to z-0 so it accepts pointer events!
+    <footer className="fixed bottom-0 left-0 w-full h-[60vh] z-0 bg-black flex flex-col justify-end pb-12 pt-24 px-6 border-t border-white/10">
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center text-center">
         
         <h2 className="text-[clamp(4rem,12vw,15rem)] leading-none font-bold tracking-tighter text-white mb-8">
@@ -11,7 +12,7 @@ export default function Footer() {
           <p className="text-sm text-white/40 max-w-xs text-left">
             Precision link management engineered for high-performance teams.
           </p>
-          <div className="flex gap-6 text-sm font-medium text-white/60">
+          <div className="flex gap-6 text-sm font-medium text-white/60 relative z-50">
             <a href="#" className="hover:text-white transition-colors duration-300">Features</a>
             <a href="#" className="hover:text-white transition-colors duration-300">Raya Pro</a>
             <a href="#" className="hover:text-white transition-colors duration-300">Login</a>

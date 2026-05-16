@@ -1,39 +1,91 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+const navLinks = [
+  { name: 'Platform', href: '#' },
+  { name: 'Analytics', href: '#' },
+  { name: 'Architecture', href: '#' },
+  { name: 'Pricing', href: '#' },
+];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline>(null);
+
+  useGSAP(() => {
+    gsap.set('.menu-link', { y: 100, opacity: 0 });
+    gsap.set('.menu-overlay', { clipPath: 'inset(0% 0% 100% 0%)' });
+
+    tl.current = gsap.timeline({ paused: true })
+      .to('.menu-overlay', {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 0.8,
+        ease: 'power4.inOut',
+      })
+      .to('.menu-link', {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+      }, "-=0.4");
+  }, { scope: containerRef });
+
+  useEffect(() => {
+    if (isOpen) {
+      tl.current?.play();
+      document.body.style.overflow = 'hidden';
+    } else {
+      tl.current?.reverse();
+      document.body.style.overflow = '';
+    }
+  }, [isOpen]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-6 py-6 pointer-events-none flex justify-end mix-blend-difference">
-      {/* Stripped back to transparent with a subtle border. 
-        Because the parent has mix-blend-difference, this entire block 
-        will perfectly invert on white backgrounds.
-      */}
-      <nav className="pointer-events-auto flex items-center gap-6 px-6 py-2.5 rounded-full border border-white/20 bg-transparent text-white">
-        
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-white/80">
-          <Link href="#architecture" className="hover:text-white transition-colors duration-300">
-            Architecture
-          </Link>
-          <Link href="#pro" className="hover:text-white transition-colors duration-300 flex items-center gap-1">
-            Raya Pro <ArrowUpRight className="w-3 h-3 opacity-50" />
-          </Link>
+    <div ref={containerRef}>
+      
+      {/* PERFECT BURGER MENU (Isolated mix-blend-difference so it doesn't break the drawer) */}
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-6 right-6 z-[200] w-12 h-12 flex flex-col items-center justify-center mix-blend-difference focus:outline-none group pointer-events-auto"
+        aria-label="Toggle Menu"
+      >
+        <div className="relative w-8 h-4">
+          <span 
+            className={`absolute right-0 h-[2px] bg-white transition-all duration-300 ease-in-out origin-center ${isOpen ? 'top-2 w-8 -rotate-45' : 'top-0 w-8 group-hover:w-6'}`} 
+          />
+          <span 
+            className={`absolute right-0 h-[2px] bg-white transition-all duration-300 ease-in-out origin-center ${isOpen ? 'top-2 w-8 rotate-45' : 'top-4 w-6 group-hover:w-8'}`} 
+          />
         </div>
+      </button>
 
-        <div className="w-[1px] h-4 bg-white/30 hidden md:block" />
-
-        {/* On a black bg: bg-white text-black looks normal.
-          On a white bg: difference blending turns this into a black button with white text!
-        */}
-        <Link 
-          href="/dashboard"
-          className="text-sm font-medium text-black bg-white px-5 py-1.5 rounded-full hover:scale-95 transition-transform duration-300"
-        >
-          Dashboard
-        </Link>
+      {/* THE DRAWER OVERLAY (Solid background, text is clear) */}
+      <div className="menu-overlay fixed inset-0 bg-[#020617] z-[150] flex flex-col justify-center px-6 md:px-24 pt-24 pb-12 will-change-[clip-path] text-white">
+        <nav className="flex flex-col gap-4 md:gap-8">
+          {navLinks.map((link, i) => (
+            <div key={i} className="overflow-hidden">
+              <Link 
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="menu-link block text-5xl md:text-[8vw] font-light tracking-tighter leading-none hover:text-white/50 transition-colors"
+              >
+                {link.name}
+              </Link>
+            </div>
+          ))}
+        </nav>
         
-      </nav>
-    </header>
+        <div className="mt-auto flex flex-col md:flex-row justify-between items-start md:items-end text-white/40 font-mono text-xs uppercase tracking-widest gap-4 overflow-hidden">
+          <p className="menu-link">Tehran, IR // System Active</p>
+          <p className="menu-link">© 2026 Raya Web Technologies</p>
+        </div>
+      </div>
+    </div>
   );
 }

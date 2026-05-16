@@ -28,7 +28,8 @@ export default function RootLayout({
         {/* Lenis Smooth Scrolling wrapper */}
         <SmoothScrollProvider>
           <Navbar />
-          <main className="flex-grow relative z-10">{children}</main>
+          {/* FIX: Removed z-10 here. The page content components will now handle their own layering. */}
+          <main className="flex-grow relative">{children}</main>
           <Footer />
         </SmoothScrollProvider>
       </body>
