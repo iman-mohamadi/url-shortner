@@ -64,10 +64,7 @@ function ParticleField() {
 
   return (
     <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={150} array={new Float32Array(150 * 3)} itemSize={3} />
-        <bufferAttribute attach="attributes-size" count={150} array={new Float32Array(150)} itemSize={1} />
-      </bufferGeometry>
+      <bufferGeometry attach="geometry" />
       <pointsMaterial
         size={0.5}
         sizeAttenuation

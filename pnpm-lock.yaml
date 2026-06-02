@@ -82,6 +82,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.15)
+      '@types/three':
+        specifier: ^0.184.1
+        version: 0.184.1
       '@workspace/eslint-config':
         specifier: workspace:^
         version: link:../../packages/eslint-config
@@ -180,7 +183,7 @@ importers:
         version: 4.3.0
       '@turbo/gen':
         specifier: ^2.9.15
-        version: 2.9.15(@types/node@20.19.41)
+        version: 2.9.16(@types/node@20.19.41)
       '@types/node':
         specifier: ^20
         version: 20.19.41
@@ -1899,8 +1902,8 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-  '@turbo/gen@2.9.15':
-    resolution: {integrity: sha512-ywed2U3ku8oPLpJKmwSpn82Tl7WCHo5W5dVyj0jj100fk3PexlaJt6Rr6mgk+62XjuiLVErSnxtFLwHUkm4erg==}
+  '@turbo/gen@2.9.16':
+    resolution: {integrity: sha512-nvEBt1FUqA7zO821Yw/GuggAG8JeT0J2en+vwvuSNqHa0df+a2zhzHF2vx/oguWQm1HCjgx87VIJWzMOr2grYA==}
     hasBin: true
 
   '@turbo/linux-64@2.9.15':
@@ -5974,7 +5977,7 @@ snapshots:
   '@turbo/darwin-arm64@2.9.15':
     optional: true
 
-  '@turbo/gen@2.9.15(@types/node@20.19.41)':
+  '@turbo/gen@2.9.16(@types/node@20.19.41)':
     dependencies:
       '@inquirer/prompts': 7.10.1(@types/node@20.19.41)
       esbuild: 0.25.12
